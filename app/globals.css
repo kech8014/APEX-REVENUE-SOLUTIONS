@@ -1644,10 +1644,16 @@ p {
   font-size: 13px;
   color: #b42318;
 }
+.fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
 .checks {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 20px;
+  gap: 10px;
 }
 @media (max-width: 640px) {
   .checks {
@@ -1655,16 +1661,65 @@ p {
   }
 }
 .check {
+  position: relative;
   display: flex;
-  gap: 10px;
   align-items: center;
-  font-size: 14px;
+  gap: 14px;
+  min-height: 56px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--slate);
   cursor: pointer;
+  user-select: none;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease);
 }
-.check input {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--teal-deep);
+.check:hover {
+  border-color: var(--teal);
+  background: var(--gray);
+}
+.check__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.check__box {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #b9c4ce;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--white);
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.check__box svg {
+  transform: scale(0);
+  transition: transform 0.3s var(--ease);
+}
+.check:has(.check__input:checked) {
+  border-color: var(--teal-deep);
+  background: rgba(47, 152, 168, 0.07);
+  color: var(--navy);
+}
+.check__input:checked + .check__box {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+}
+.check__input:checked + .check__box svg {
+  transform: scale(1);
+}
+.check__input:focus-visible + .check__box {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
 }
 .form__footer {
   display: flex;

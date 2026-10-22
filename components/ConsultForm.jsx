@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/lib/data";
 
 const sizes = ["Solo physician", "2–5 providers", "6–20 providers", "21+ providers", "Healthcare organization"];
@@ -108,13 +108,16 @@ export default function ConsultForm() {
           <label htmlFor="specialty">Specialty</label>
           <input type="text" placeholder="e.g. Internal Medicine" {...fieldProps("specialty")} />
         </div>
-        <fieldset className="field form__full" style={{ border: 0, padding: 0, margin: 0 }}>
+        <fieldset className="form__full fieldset">
           <legend className="legend">Services of interest</legend>
           <div className="checks">
             {services.map((s) => (
               <label className="check" key={s.slug}>
-                <input type="checkbox" name="services" value={s.title} />
-                {s.title}
+                <input className="check__input" type="checkbox" name="services" value={s.title} />
+                <span className="check__box" aria-hidden="true">
+                  <Check size={14} strokeWidth={2.5} />
+                </span>
+                <span className="check__label">{s.title}</span>
               </label>
             ))}
           </div>
