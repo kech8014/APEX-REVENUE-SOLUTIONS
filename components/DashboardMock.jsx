@@ -47,7 +47,7 @@ export default function DashboardMock() {
                 Billed
               </span>
               <span>
-                <i style={{ background: "var(--teal)" }} />
+                <i style={{ background: "#9a9a9a" }} />
                 Collected
               </span>
             </span>

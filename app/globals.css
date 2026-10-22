@@ -1,14 +1,14 @@
 :root {
-  --navy: #0b1018;
-  --navy-2: #121a26;
+  --navy: #0a0a0a;
+  --navy-2: #161616;
   --teal: #2f98a8;
   --teal-deep: #176b76;
   --teal-deeper: #0f5660;
   --white: #ffffff;
-  --gray: #f3f6f8;
-  --slate: #263544;
-  --muted: #5b6b7a;
-  --line: #dce2e8;
+  --gray: #f4f4f4;
+  --slate: #2e2e2e;
+  --muted: #6b6b6b;
+  --line: #e3e3e3;
   --line-dark: rgba(255, 255, 255, 0.12);
 
   --font-head: var(--font-manrope), "Manrope", system-ui, sans-serif;
@@ -450,8 +450,8 @@ p {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(11, 16, 24, 0.96) 0%, rgba(11, 16, 24, 0.7) 50%, rgba(11, 16, 24, 0.35) 100%),
-    linear-gradient(0deg, rgba(11, 16, 24, 0.9) 0%, transparent 40%);
+    linear-gradient(90deg, rgba(10, 10, 10, 0.96) 0%, rgba(10, 10, 10, 0.7) 50%, rgba(10, 10, 10, 0.35) 100%),
+    linear-gradient(0deg, rgba(10, 10, 10, 0.9) 0%, transparent 40%);
 }
 .hero__ring {
   position: absolute;
@@ -840,7 +840,7 @@ p {
 .media {
   position: relative;
   overflow: hidden;
-  background: var(--gray) linear-gradient(135deg, #e6ecf0, #f3f6f8);
+  background: var(--gray) linear-gradient(135deg, #e9e9e9, #f3f6f8);
   border-radius: var(--radius);
 }
 .media img {
@@ -1152,7 +1152,7 @@ p {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, var(--navy) 42%, rgba(11, 16, 24, 0.55) 75%, rgba(11, 16, 24, 0.3));
+  background: linear-gradient(90deg, var(--navy) 42%, rgba(10, 10, 10, 0.55) 75%, rgba(10, 10, 10, 0.3));
 }
 .page-hero__inner {
   padding-top: clamp(72px, 10vw, 140px);
@@ -1189,7 +1189,7 @@ p {
     inset: 0;
   }
   .page-hero::before {
-    background: rgba(11, 16, 24, 0.85);
+    background: rgba(10, 10, 10, 0.85);
   }
 }
 
@@ -1199,7 +1199,7 @@ p {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 40px 80px -40px rgba(11, 16, 24, 0.35);
+  box-shadow: 0 40px 80px -40px rgba(10, 10, 10, 0.35);
   font-size: 13px;
   color: var(--slate);
 }
@@ -1495,7 +1495,7 @@ p {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, var(--navy) 30%, rgba(11, 16, 24, 0.6));
+  background: linear-gradient(90deg, var(--navy) 30%, rgba(10, 10, 10, 0.6));
 }
 .cta__inner {
   display: grid;
@@ -1634,7 +1634,7 @@ p {
 .field textarea:focus {
   outline: none;
   border-bottom-color: var(--teal-deep);
-  background: #eaf1f4;
+  background: #ececec;
 }
 .field [aria-invalid="true"] {
   border-bottom-color: #b42318;
@@ -1695,7 +1695,7 @@ p {
   place-items: center;
   width: 22px;
   height: 22px;
-  border: 1.5px solid #b9c4ce;
+  border: 1.5px solid #bdbdbd;
   border-radius: var(--radius);
   background: var(--white);
   color: var(--white);
@@ -2024,23 +2024,6 @@ html[data-scroll-dir="down"] .header {
     rotate: 360deg;
   }
 }
-.hero__title em {
-  background: linear-gradient(90deg, var(--teal) 0%, #7cc6d1 50%, var(--teal) 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 6s ease-in-out 1.4s infinite;
-}
-@keyframes shimmer {
-  0%,
-  100% {
-    background-position: 100% 0;
-  }
-  50% {
-    background-position: 0 0;
-  }
-}
 
 /* Inner page hero media parallax container */
 .page-hero__media {
@@ -2186,7 +2169,7 @@ html[data-scroll-dir="down"] .header {
 }
 .dash:hover {
   transform: translateY(-6px);
-  box-shadow: 0 60px 100px -50px rgba(11, 16, 24, 0.45);
+  box-shadow: 0 60px 100px -50px rgba(10, 10, 10, 0.45);
 }
 
 /* Process steps: diamond pulses */
@@ -2239,4 +2222,205 @@ html[data-scroll-dir="down"] .header {
   .hero__media img {
     animation: none;
   }
+}
+
+/* ======================================================
+   Monochrome refinement — black & white with a teal accent
+   ====================================================== */
+
+.eyebrow {
+  color: var(--navy);
+}
+.eyebrow::before {
+  background: var(--teal);
+}
+.section--navy .eyebrow,
+.hero .eyebrow,
+.page-hero .eyebrow,
+.cta .eyebrow {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Primary buttons: black on light, white on dark; hover sweeps to teal */
+.btn {
+  --btn-bg: var(--navy);
+  --btn-fg: var(--white);
+  --btn-sweep: var(--teal-deep);
+}
+.btn:hover {
+  --btn-bg: var(--navy);
+}
+.hero .btn:not(.btn--ghost-light),
+.cta .btn:not(.btn--ghost-light),
+.section--navy .btn:not(.btn--ghost-light) {
+  --btn-bg: var(--white);
+  --btn-fg: var(--navy);
+}
+.hero .btn:not(.btn--ghost-light):hover,
+.cta .btn:not(.btn--ghost-light):hover {
+  --btn-fg: var(--white);
+}
+.btn--ghost-light {
+  --btn-sweep: var(--white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.btn--ghost-light:hover {
+  --btn-fg: var(--navy);
+}
+
+/* Hero: high-contrast black & white photography */
+.hero {
+  background: #000;
+}
+.hero__media video,
+.hero__media img {
+  filter: grayscale(1) contrast(1.15) brightness(0.85);
+  opacity: 0.6;
+}
+.hero::before {
+  background:
+    linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.82) 38%, rgba(0, 0, 0, 0.35) 72%, rgba(0, 0, 0, 0.15) 100%),
+    linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0) 35%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 25%);
+}
+/* Subtle film grain for an editorial finish */
+.hero::after,
+.page-hero::after,
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero__title em {
+  font-style: normal;
+  color: var(--white);
+}
+.hero__title em::after {
+  content: "";
+  display: inline-block;
+  width: 0.15em;
+  height: 0.15em;
+  margin-left: 0.05em;
+  background: var(--teal);
+}
+.hero__ring {
+  border-color: rgba(255, 255, 255, 0.07);
+}
+.hero__ring::before {
+  background: rgba(255, 255, 255, 0.35);
+}
+.hero__ring::after {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+.hero__rail .rail-line {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), transparent);
+}
+.hero__aside .index,
+.step .index,
+.value .index.teal {
+  color: rgba(255, 255, 255, 0.5);
+}
+.hero__progress::after {
+  background: var(--white);
+}
+
+/* Inner page heroes and CTA band: pure black */
+.page-hero,
+.cta,
+.section--navy,
+.footer {
+  background: #000;
+}
+.page-hero__media img,
+.cta__media img {
+  filter: grayscale(1) contrast(1.15);
+}
+.page-hero::before {
+  background: linear-gradient(90deg, #000 42%, rgba(0, 0, 0, 0.6) 72%, rgba(0, 0, 0, 0.25));
+}
+.cta::before {
+  background: linear-gradient(90deg, #000 30%, rgba(0, 0, 0, 0.65));
+}
+@media (max-width: 760px) {
+  .page-hero::before {
+    background: rgba(0, 0, 0, 0.82);
+  }
+}
+
+/* Light surfaces: accents move from teal to black */
+.index,
+.pillar__label,
+.faq summary .faq__num,
+.tags li span {
+  color: var(--muted);
+}
+.card__icon,
+.service-block__icon {
+  color: var(--navy);
+}
+.service-row:hover h3 {
+  color: var(--navy);
+}
+.service-row:hover .service-row__arrow,
+.faq details[open] .faq__icon {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.check-list svg {
+  color: var(--teal-deep);
+}
+.link-arrow:hover {
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.spotlight::after {
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 0, 0, 0.05), transparent 60%);
+}
+.step::before {
+  background: var(--white);
+}
+.step:hover::before,
+.timeline__item:hover::before {
+  box-shadow: 0 0 0 6px rgba(47, 152, 168, 0.25);
+  background: var(--teal);
+}
+.timeline__item:hover .timeline__num {
+  color: var(--navy);
+}
+.strip {
+  background: var(--navy);
+  border-bottom: 0;
+}
+.strip__item {
+  color: var(--white);
+}
+
+/* Form: checked tiles in black */
+.check:has(.check__input:checked) {
+  border-color: var(--navy);
+  background: var(--gray);
+}
+.check__input:checked + .check__box {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.check:hover {
+  border-color: var(--navy);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-bottom-color: var(--navy);
+}
+.form__status {
+  border-left-color: var(--navy);
+}
+
+/* Dashboard bars: black and mid-gray, teal only for the meter */
+.dash__bars b + b {
+  background: #9a9a9a;
 }

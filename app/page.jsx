@@ -50,7 +50,7 @@ export default function Home() {
             </Reveal>
             <SplitText
               className="display hero__title"
-              lines={["Get paid fully", "for the care", <em key="em">you deliver.</em>]}
+              lines={["Get paid fully", "for the care", <em key="em">you deliver</em>]}
             />
             <Reveal delay={0.16}>
               <p className="hero__lead">
