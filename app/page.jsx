@@ -30,13 +30,7 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="hero">
-        <div className="hero__media" aria-hidden="true">
-          <video data-parallax="0.18" autoPlay muted loop playsInline preload="metadata" poster={images.heroPoster}>
-            <source src={heroVideo} type="video/mp4" />
-          </video>
-        </div>
-        <div className="hero__ring" aria-hidden="true" />
-
+        <div className="hero__grid-bg" aria-hidden="true" />
         <div className="container hero__inner">
           <div className="hero__rail" aria-hidden="true">
             <span>Revenue Cycle Partner</span>
@@ -52,18 +46,18 @@ export default function Home() {
               className="display hero__title"
               lines={["Get paid fully", "for the care", <em key="em">you deliver</em>]}
             />
-            <Reveal delay={0.16}>
+            <Reveal delay={0.4}>
               <p className="hero__lead">
                 APEX REVENUE SOLUTIONS manages medical billing and the full revenue cycle for physicians, independent
                 practices and healthcare organizations — with dedicated people, disciplined process and clear
                 reporting.
               </p>
             </Reveal>
-            <Reveal delay={0.24} className="hero__actions">
+            <Reveal delay={0.5} className="hero__actions">
               <Link href="/contact" className="btn">
                 Schedule a Consultation <ArrowRight size={16} aria-hidden="true" />
               </Link>
-              <Link href="/services" className="btn btn--ghost-light">
+              <Link href="/services" className="btn btn--ghost">
                 Explore Our Services
               </Link>
             </Reveal>
@@ -75,19 +69,31 @@ export default function Home() {
             </a>
           </div>
 
-          <Reveal as="aside" className="hero__aside" delay={0.3} aria-label="Highlights">
-            <ul>
-              {heroPoints.map((p, i) => (
-                <li key={p.title}>
-                  <span className="index">{String(i + 1).padStart(2, "0")}</span>
-                  <h3>{p.title}</h3>
-                  <p>{p.text}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          <div className="hero__visual">
+            <div className="hero__ring" aria-hidden="true" />
+            <div className="hero__media" aria-hidden="true">
+              <video data-parallax="0.08" autoPlay muted loop playsInline preload="metadata" poster={images.heroPoster}>
+                <source src={heroVideo} type="video/mp4" />
+              </video>
+            </div>
+            <span className="hero__tag" aria-hidden="true">
+              People · Process · Technology
+            </span>
+            <Reveal as="aside" className="hero__points" delay={0.7} aria-label="Highlights">
+              <ul>
+                {heroPoints.map((p, i) => (
+                  <li key={p.title}>
+                    <span className="index">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3>{p.title}</h3>
+                      <p>{p.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
         </div>
-        <div className="hero__progress" aria-hidden="true" />
       </section>
 
       {/* Marquee */}
