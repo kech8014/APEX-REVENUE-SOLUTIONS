@@ -40,7 +40,7 @@ export default function AboutPage() {
               </p>
             </div>
           </Reveal>
-          <Reveal className="media media--tall media--mono" delay={0.1}>
+          <Reveal className="media media--tall media--mono media--wipe" delay={0.1}>
             <img src={images.teamMeeting} alt="Team collaborating in a meeting room" loading="lazy" />
             <span className="media__tag">
               <span className="index">APEX</span>Our team
@@ -58,7 +58,7 @@ export default function AboutPage() {
           />
           <div className="pillars">
             {pillars.map((p, i) => (
-              <Reveal className="pillar" key={p.label} delay={i * 0.08}>
+              <Reveal className="pillar spotlight" key={p.label} delay={i * 0.08}>
                 <span className="pillar__label">
                   {String(i + 1).padStart(2, "0")} — {p.label}
                 </span>
@@ -87,7 +87,7 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="container split">
-          <Reveal className="media media--wide media--mono">
+          <Reveal className="media media--wide media--mono media--wipe">
             <img src={images.laptopCharts} alt="" loading="lazy" />
           </Reveal>
           <Reveal delay={0.1}>

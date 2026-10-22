@@ -32,7 +32,7 @@ export default function WhoWeServePage() {
         <div className="container">
           <div className="cards">
             {audiences.map((a, i) => (
-              <Reveal className="card" key={a.title} delay={i * 0.08}>
+              <Reveal className="card spotlight" key={a.title} delay={i * 0.08}>
                 <div className="media media--mono">
                   <img src={images[a.image]} alt="" loading="lazy" />
                 </div>

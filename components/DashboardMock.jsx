@@ -1,3 +1,5 @@
+import CountUp from "./CountUp";
+
 // Illustrative reporting preview. Values are sample data, not client results.
 const months = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
 const billed = [62, 70, 66, 74, 78, 72, 80, 84, 79, 86, 88, 90];
@@ -25,15 +27,15 @@ export default function DashboardMock() {
         <div className="dash__kpis">
           <div className="dash__kpi">
             <span>Claims submitted</span>
-            <strong>1,248</strong>
+            <strong><CountUp value={1248} /></strong>
           </div>
           <div className="dash__kpi">
             <span>Open A/R items</span>
-            <strong>312</strong>
+            <strong><CountUp value={312} /></strong>
           </div>
           <div className="dash__kpi">
             <span>Denials worked</span>
-            <strong>96</strong>
+            <strong><CountUp value={96} /></strong>
           </div>
         </div>
         <div className="dash__chart">

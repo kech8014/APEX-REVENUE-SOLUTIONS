@@ -69,7 +69,7 @@ export default function ServicesPage() {
 
       <section className="section section--gray">
         <div className="container split">
-          <Reveal className="media media--wide media--mono">
+          <Reveal className="media media--wide media--mono media--wipe">
             <img src={images.analytics} alt="Revenue cycle analytics on a laptop screen" loading="lazy" />
           </Reveal>
           <Reveal delay={0.1}>

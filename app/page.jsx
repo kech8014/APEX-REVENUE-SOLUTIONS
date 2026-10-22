@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { audiences, faqs, heroVideo, images, pillars, process, services } from "@/lib/data";
 import Reveal from "@/components/Reveal";
+import SplitText from "@/components/SplitText";
 import SectionHead from "@/components/SectionHead";
 import Icon from "@/components/Icon";
 import DashboardMock from "@/components/DashboardMock";
@@ -30,7 +31,7 @@ export default function Home() {
       {/* Hero */}
       <section className="hero">
         <div className="hero__media" aria-hidden="true">
-          <video autoPlay muted loop playsInline preload="metadata" poster={images.heroPoster}>
+          <video data-parallax="0.18" autoPlay muted loop playsInline preload="metadata" poster={images.heroPoster}>
             <source src={heroVideo} type="video/mp4" />
           </video>
         </div>
@@ -47,13 +48,10 @@ export default function Home() {
             <Reveal>
               <span className="eyebrow">Healthcare Revenue Cycle Management</span>
             </Reveal>
-            <Reveal delay={0.08}>
-              <h1 className="display hero__title">
-                Get paid fully
-                <br />
-                for the care <em>you deliver.</em>
-              </h1>
-            </Reveal>
+            <SplitText
+              className="display hero__title"
+              lines={["Get paid fully", "for the care", <em key="em">you deliver.</em>]}
+            />
             <Reveal delay={0.16}>
               <p className="hero__lead">
                 APEX REVENUE SOLUTIONS manages medical billing and the full revenue cycle for physicians, independent
@@ -112,7 +110,7 @@ export default function Home() {
           </SectionHead>
           <div className="pillars">
             {pillars.map((p, i) => (
-              <Reveal className="pillar" key={p.label} delay={i * 0.08}>
+              <Reveal className="pillar spotlight" key={p.label} delay={i * 0.08}>
                 <span className="pillar__label">
                   {String(i + 1).padStart(2, "0")} — {p.label}
                 </span>
@@ -216,7 +214,7 @@ export default function Home() {
           </SectionHead>
           <div className="cards">
             {audiences.map((a, i) => (
-              <Reveal className="card" key={a.title} delay={i * 0.08}>
+              <Reveal className="card spotlight" key={a.title} delay={i * 0.08}>
                 <div className="media media--mono">
                   <img src={images[a.image]} alt="" loading="lazy" />
                 </div>
@@ -241,7 +239,7 @@ export default function Home() {
       {/* About teaser */}
       <section className="section section--gray">
         <div className="container split">
-          <Reveal className="media media--tall media--mono">
+          <Reveal className="media media--tall media--mono media--wipe">
             <img src={images.teamTable} alt="APEX REVENUE SOLUTIONS team reviewing account reports" loading="lazy" />
             <span className="media__tag">
               <span className="index">01</span>About us

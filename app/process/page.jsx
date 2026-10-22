@@ -71,7 +71,7 @@ export default function ProcessPage() {
               ))}
             </ul>
           </Reveal>
-          <Reveal className="media media--tall media--mono" delay={0.1}>
+          <Reveal className="media media--tall media--mono media--wipe" delay={0.1}>
             <img src={images.office} alt="" loading="lazy" />
           </Reveal>
         </div>

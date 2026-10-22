@@ -10,7 +10,7 @@ export default function CTA({
   return (
     <section className="cta">
       <div className="cta__media">
-        <img src={images.teamMeeting} alt="" loading="lazy" />
+        <img src={images.teamMeeting} alt="" loading="lazy" data-parallax="0.15" />
       </div>
       <div className="container cta__inner">
         <Reveal>

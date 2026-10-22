@@ -1,6 +1,8 @@
 import { Inter, Manrope } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Motion from "@/components/Motion";
+import Spotlight from "@/components/Spotlight";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
@@ -34,6 +36,8 @@ export default function RootLayout({ children }) {
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <Motion />
+        <Spotlight />
         <Header />
         <main id="main">{children}</main>
         <Footer />
