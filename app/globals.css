@@ -3622,3 +3622,206 @@ html[data-scroll-dir="down"] .header {
     transform: none;
   }
 }
+
+/* ======================================================
+   Contact page — split hero with form
+   ====================================================== */
+
+.contact-hero::before {
+  background: linear-gradient(90deg, #000 35%, rgba(0, 0, 0, 0.82) 60%, rgba(0, 0, 0, 0.7));
+}
+.contact-hero .page-hero__media {
+  inset: 0;
+}
+.contact-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  padding-top: clamp(48px, 7vw, 96px);
+  padding-bottom: clamp(40px, 6vw, 80px);
+}
+.contact-hero__intro {
+  position: sticky;
+  top: calc(var(--header-h) + 32px);
+}
+.contact-hero h1 {
+  max-width: 11ch;
+}
+.contact-hero__list {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.contact-hero__list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+}
+.contact-hero__list svg {
+  flex: none;
+  color: var(--teal);
+}
+.contact-hero__list a {
+  color: var(--white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  transition: border-color 0.3s;
+}
+.contact-hero__list a:hover {
+  border-color: var(--white);
+}
+.contact-hero__form {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(22px, 3vw, 36px);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6);
+  color: var(--slate);
+}
+.contact-hero__form-head h2 {
+  font-size: clamp(22px, 2vw, 28px);
+  letter-spacing: -0.02em;
+}
+.contact-hero__form-head p {
+  margin: 6px 0 22px;
+  font-size: 14px;
+  color: var(--muted);
+}
+/* The form card already provides the frame */
+.contact-hero__form .form {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.contact-hero__form .form__grid {
+  gap: 16px 18px;
+}
+.contact-hero__form .field input,
+.contact-hero__form .field select {
+  min-height: 46px;
+}
+.contact-hero__form .field textarea {
+  min-height: 110px;
+}
+.contact-hero__form .check {
+  min-height: 46px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.contact-hero__form .form__footer {
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+/* Next steps: three tiles */
+.next-steps {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Reach cards + map */
+.contact-reach {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: stretch;
+}
+.reach-cards {
+  display: grid;
+  gap: 12px;
+}
+.reach-card {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  align-items: center;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: border-color 0.3s, transform 0.5s var(--ease);
+}
+.reach-card:hover {
+  border-color: var(--navy);
+  transform: translateY(-3px);
+}
+.reach-card svg {
+  grid-row: 1 / 3;
+  width: 48px;
+  height: 48px;
+  padding: 13px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: var(--white);
+}
+.reach-card span {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.reach-card strong {
+  font-family: var(--font-head);
+  font-size: 17px;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+.reach-notice {
+  margin-top: 18px;
+}
+.contact-map {
+  min-height: 380px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--line);
+}
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+  filter: grayscale(0.4);
+}
+
+@media (max-width: 960px) {
+  .contact-hero__grid,
+  .contact-reach {
+    grid-template-columns: 1fr;
+  }
+  .contact-hero__intro {
+    position: static;
+  }
+  .next-steps {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .contact-hero__grid {
+    padding-top: 36px;
+    padding-bottom: 12px;
+    gap: 28px;
+  }
+  .contact-hero__list {
+    margin-top: 24px;
+  }
+  .contact-hero__form {
+    margin: 0 -10px;
+    padding: 20px 16px;
+  }
+  .next-steps {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .contact-map,
+  .contact-map iframe {
+    min-height: 280px;
+  }
+}
