@@ -1,5 +1,6 @@
 import { Inter, Manrope } from "next/font/google";
 import Header from "@/components/Header";
+import { contact } from "@/lib/data";
 import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 import Spotlight from "@/components/Spotlight";
@@ -10,7 +11,7 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", displa
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata = {
-  metadataBase: new URL("https://apexrevenuesolutions.com"),
+  metadataBase: new URL("https://apexrevsolutions.com"),
   title: {
     default: "APEX REVENUE SOLUTIONS | Healthcare Revenue Cycle Management",
     template: "%s | APEX REVENUE SOLUTIONS",
@@ -34,6 +35,28 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "APEX REVENUE SOLUTIONS",
+              url: "https://apexrevsolutions.com",
+              email: contact.email,
+              telephone: contact.phoneHref.replace("tel:", ""),
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: contact.street,
+                addressLocality: contact.city,
+                addressRegion: contact.region,
+                postalCode: contact.postalCode,
+                addressCountry: "US",
+              },
+              areaServed: "US",
+            }),
+          }}
+        />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

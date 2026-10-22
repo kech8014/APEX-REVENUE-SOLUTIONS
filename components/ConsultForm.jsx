@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import { services } from "@/lib/data";
+import { contact, services } from "@/lib/data";
 
 const sizes = ["Solo physician", "2–5 providers", "6–20 providers", "21+ providers", "Healthcare organization"];
 
@@ -146,7 +146,8 @@ export default function ConsultForm() {
         )}
         {status === "error" && (
           <p className="form__status form__status--error">
-            Something went wrong sending your request. Please try again or email us directly.
+            Something went wrong sending your request. Please try again, email us at{" "}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a> or call {contact.phone}.
           </p>
         )}
       </div>

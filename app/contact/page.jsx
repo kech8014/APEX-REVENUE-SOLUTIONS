@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { contact, images } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
@@ -55,6 +55,15 @@ export default function ContactPage() {
               </li>
               <li>
                 <MapPin size={20} aria-hidden="true" />
+                <div>
+                  <span>Office</span>
+                  <a href={contact.mapHref} target="_blank" rel="noopener noreferrer">
+                    {contact.address}
+                  </a>
+                </div>
+              </li>
+              <li>
+                <Globe size={20} aria-hidden="true" />
                 <div>
                   <span>Coverage</span>
                   <strong>{contact.location}</strong>

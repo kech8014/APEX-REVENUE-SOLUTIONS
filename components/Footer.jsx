@@ -56,8 +56,12 @@ export default function Footer() {
             <li>
               <a href={contact.phoneHref}>{contact.phone}</a>
             </li>
+            <li>
+              <a href={contact.mapHref} target="_blank" rel="noopener noreferrer">
+                {contact.address}
+              </a>
+            </li>
             <li>{contact.hours}</li>
-            <li>{contact.location}</li>
           </ul>
         </div>
       </div>
