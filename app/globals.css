@@ -2656,3 +2656,20 @@ html[data-scroll-dir="down"] .header {
   transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease),
     translate 0.4s var(--ease);
 }
+
+/* Hero footage: frame the receptionist, reveal colour on hover */
+.hero__media video {
+  object-position: 28% 50%;
+  transition: filter 1s var(--ease);
+}
+.hero__visual:hover .hero__media video {
+  filter: grayscale(0) contrast(1);
+}
+@media (max-width: 1080px) {
+  .hero__media {
+    aspect-ratio: 16 / 9;
+  }
+  .hero__media video {
+    object-position: 50% 50%;
+  }
+}

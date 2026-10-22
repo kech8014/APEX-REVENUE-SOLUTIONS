@@ -6,7 +6,7 @@ import { Pause, Play } from "lucide-react";
 // Muted looping video that only downloads once near the viewport, plays while
 // visible and pauses off-screen. `active` lets a parent pause it (e.g. tabs or
 // hover cards); `controls` adds an accessible play/pause toggle.
-export default function LazyVideo({ src, poster, className = "", active = true, controls = false, label, ...rest }) {
+export default function LazyVideo({ src, webm, poster, className = "", active = true, controls = false, label, ...rest }) {
   const ref = useRef(null);
   const [loaded, setLoaded] = useState(false);
   const [inView, setInView] = useState(false);
@@ -29,6 +29,11 @@ export default function LazyVideo({ src, poster, className = "", active = true, 
 
   const shouldPlay = loaded && inView && active && !userPaused;
 
+  // <source> children added after mount are only picked up by load().
+  useEffect(() => {
+    if (loaded && webm) ref.current?.load();
+  }, [loaded, webm]);
+
   useEffect(() => {
     const el = ref.current;
     if (!el || !loaded) return;
@@ -42,7 +47,7 @@ export default function LazyVideo({ src, poster, className = "", active = true, 
         ref={ref}
         className={className}
         poster={poster}
-        src={loaded ? src : undefined}
+        src={loaded && !webm ? src : undefined}
         muted
         loop
         playsInline
@@ -50,7 +55,10 @@ export default function LazyVideo({ src, poster, className = "", active = true, 
         aria-hidden={label ? undefined : "true"}
         aria-label={label}
         {...rest}
-      />
+      >
+        {loaded && webm && <source src={webm} type="video/webm" />}
+        {loaded && webm && <source src={src} type="video/mp4" />}
+      </video>
       {controls && (
         <button
           type="button"
