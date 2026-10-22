@@ -14,7 +14,10 @@
   --font-head: var(--font-manrope), "Manrope", system-ui, sans-serif;
   --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
 
-  --radius: 2px;
+  --radius: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --inset: clamp(8px, 1.4vw, 20px);
   --container: 1280px;
   --gutter: clamp(16px, 4vw, 40px);
   --header-h: 76px;
@@ -2663,5 +2666,213 @@ html[data-scroll-dir="down"] .header {
   }
   .hero__media video {
     object-position: 50% 50%;
+  }
+}
+
+/* ======================================================
+   Soft geometry — rounded, airy, less boxy
+   ====================================================== */
+
+/* Pills for buttons, tags and small labels */
+.btn,
+.header__cta,
+.toc a,
+.video-toggle,
+.hero__tag,
+.media__tag,
+.video-card__hint,
+.cycle__caption {
+  border-radius: var(--radius-pill);
+}
+.btn {
+  padding: 0 28px;
+}
+
+/* Dark bands become inset rounded panels */
+.page-hero,
+.section--navy,
+.cta {
+  margin-left: var(--inset);
+  margin-right: var(--inset);
+  border-radius: var(--radius-lg);
+}
+.cta {
+  margin-bottom: var(--inset);
+}
+.page-hero {
+  margin-top: 4px;
+}
+.footer {
+  margin: 0 var(--inset);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.strip {
+  margin: var(--inset);
+  border-radius: var(--radius-pill);
+}
+
+/* Hero */
+.hero {
+  border-bottom: 0;
+}
+.hero__grid-bg {
+  opacity: 0.25;
+}
+.hero__media {
+  border-radius: var(--radius-lg);
+  animation: hero-wipe-round 1.6s var(--ease) 0.2s forwards;
+}
+@keyframes hero-wipe-round {
+  from {
+    clip-path: inset(0 0 100% 0 round var(--radius-lg));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--radius-lg));
+  }
+}
+.hero__tag {
+  top: 16px;
+  right: 16px;
+}
+.hero__media .video-toggle {
+  top: 64px;
+}
+.hero__points {
+  border-radius: 20px;
+  padding: 10px 28px;
+}
+.hero__title em::after {
+  border-radius: 50%;
+}
+
+/* Pillars and tags: separated soft tiles instead of a ruled grid */
+.pillars {
+  gap: 16px;
+  border: 0;
+}
+.pillar {
+  border: 0;
+  border-radius: 20px;
+  background: var(--gray);
+}
+.pillar:hover {
+  background: #ececec;
+}
+.tags {
+  gap: 10px;
+  border: 0;
+}
+.tags li {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 16px 22px;
+}
+
+/* Cards and media */
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.card .media {
+  border-radius: 0;
+}
+.media {
+  border-radius: var(--radius-lg);
+}
+.media__tag {
+  left: 16px;
+  bottom: 16px;
+}
+.card__icon,
+.service-block__icon {
+  border-radius: 12px;
+}
+.media--wipe {
+  clip-path: inset(0 0 100% 0 round var(--radius-lg));
+}
+.media--wipe.is-visible {
+  clip-path: inset(0 0 0 0 round var(--radius-lg));
+}
+
+/* Service rows highlight as a soft capsule */
+.service-row {
+  border-radius: 16px;
+}
+
+/* Revenue cycle showcase */
+.cycle__stage {
+  border-radius: var(--radius-lg);
+}
+.cycle__caption {
+  left: 16px;
+  bottom: 16px;
+}
+
+/* Dashboard */
+.dash {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.dash__kpis,
+.dash__chart,
+.dash__rows {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.dash__bars b {
+  border-radius: 3px 3px 0 0;
+}
+.dash__meter,
+.dash__meter i {
+  border-radius: 4px;
+}
+
+/* Round markers instead of diamonds */
+.step::before,
+.timeline__item::before,
+.strip__item::after {
+  border-radius: 50%;
+  transform: none;
+}
+.step:hover::before,
+.timeline__item:hover::before {
+  transform: scale(1.3);
+}
+
+/* Forms */
+.form {
+  border-radius: var(--radius-lg);
+}
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--navy);
+}
+.check {
+  border-radius: 14px;
+}
+.check__box {
+  border-radius: 6px;
+}
+.form__status,
+.notice {
+  border-radius: 12px;
+}
+
+/* Footer logo plate */
+.footer__logo {
+  border-radius: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__media,
+  .media--wipe {
+    clip-path: none;
   }
 }
