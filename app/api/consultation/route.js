@@ -93,6 +93,18 @@ ${contact.address}`;
   if (!res.ok) throw new Error(`Resend responded ${res.status}: ${await res.text()}`);
 }
 
+// Verifies a Cloudflare Turnstile token when a secret key is configured.
+async function passesTurnstile(token, ip) {
+  if (!process.env.TURNSTILE_SECRET_KEY) return true;
+  if (!token) return false;
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    body: new URLSearchParams({ secret: process.env.TURNSTILE_SECRET_KEY, response: token, ...(ip && { remoteip: ip }) }),
+  });
+  const data = await res.json().catch(() => ({}));
+  return data.success === true;
+}
+
 export async function POST(request) {
   let body;
   try {
@@ -116,6 +128,16 @@ export async function POST(request) {
 
   if (!lead.name || !lead.organization || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 422 });
+  }
+
+  // Bots: a filled honeypot or an instant submit is accepted silently and dropped.
+  if (clean(body.website) || Number(body.elapsedMs) < 2500) {
+    console.warn("[consultation-request] dropped as likely bot", { email: lead.email });
+    return NextResponse.json({ ok: true });
+  }
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  if (!(await passesTurnstile(clean(body.turnstileToken), ip))) {
+    return NextResponse.json({ error: "Bot check failed. Please try again." }, { status: 403 });
   }
 
   // Always keep a copy in the server log so no request is lost.

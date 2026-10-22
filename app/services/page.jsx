@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import Icon from "@/components/Icon";
 import CTA from "@/components/CTA";
+import ServiceTiles from "@/components/ServiceTiles";
 
 export const metadata = {
   title: "Services",
@@ -22,18 +23,9 @@ export default function ServicesPage() {
         crumb="Services"
       />
 
-      <section className="section section--tight section--gray">
+      <section className="service-tiles-wrap">
         <div className="container">
-          <Reveal>
-            <span className="eyebrow">Jump to a service</span>
-            <nav className="toc mt-lg" aria-label="Services" style={{ marginTop: 24 }}>
-              {services.map((s, i) => (
-                <a key={s.slug} href={`#${s.slug}`}>
-                  {String(i + 1).padStart(2, "0")} — {s.title}
-                </a>
-              ))}
-            </nav>
-          </Reveal>
+          <ServiceTiles />
         </div>
       </section>
 

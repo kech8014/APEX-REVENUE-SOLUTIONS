@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { contact, services, specialties } from "@/lib/data";
 import Select from "./Select";
+import BotCheck from "./BotCheck";
 
 const sizes = ["Solo physician", "2–5 providers", "6–20 providers", "21+ providers", "Healthcare organization"];
 const serviceOptions = ["Full revenue cycle management", ...services.map((s) => s.title), "Not sure yet"];
@@ -19,6 +20,14 @@ function validate(data) {
 export default function ConsultForm() {
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
+  const [human, setHuman] = useState(false);
+  const [token, setToken] = useState("");
+  const startedAt = useRef(0);
+  const onToken = useCallback((t) => setToken(t), []);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -28,11 +37,17 @@ export default function ConsultForm() {
     data.services = fd.getAll("services").filter(Boolean);
 
     const found = validate(data);
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? !token : !human) {
+      found.bot = "Please confirm you’re not a robot.";
+    }
     setErrors(found);
     if (Object.keys(found).length) {
       form.querySelector(`[name="${Object.keys(found)[0]}"]`)?.focus();
       return;
     }
+    data.turnstileToken = token;
+    data.elapsedMs = Date.now() - startedAt.current;
+    delete data.human;
 
     setStatus("sending");
     try {
@@ -43,6 +58,9 @@ export default function ConsultForm() {
       });
       if (!res.ok) throw new Error();
       form.reset();
+      setHuman(false);
+      setToken("");
+      window.turnstile?.reset();
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -114,6 +132,8 @@ export default function ConsultForm() {
           />
         </div>
       </div>
+
+      <BotCheck onToken={onToken} checked={human} onCheck={setHuman} error={errors.bot} />
 
       <div className="form__footer">
         <p className="form__note">No patient health information, please. We reply within one business day.</p>

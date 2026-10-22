@@ -21,5 +21,7 @@ npm run dev
   - `CONTACT_FROM_EMAIL` (optional, default `APEX Website <website@apexrevsolutions.com>`;
     the domain must be verified in Resend)
   - `CONTACT_TO_EMAIL` (optional, default `team@apexrevsolutions.com`)
+  - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` (optional, free Cloudflare Turnstile
+    bot check; without them the form uses a checkbox plus honeypot and timing checks)
   - `CONTACT_REPLY_FROM_EMAIL` (optional sender for the automatic thank-you email to the visitor,
     default `APEX REVENUE SOLUTIONS <team@apexrevsolutions.com>`)

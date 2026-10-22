@@ -8,6 +8,8 @@ import LazyVideo from "@/components/LazyVideo";
 import CycleShowcase from "@/components/CycleShowcase";
 import VideoCard from "@/components/VideoCard";
 import HeroDock from "@/components/HeroDock";
+import ServicesPopup from "@/components/ServicesPopup";
+import ServiceTiles from "@/components/ServiceTiles";
 import DashboardMock from "@/components/DashboardMock";
 import FaqList from "@/components/FaqList";
 import CTA from "@/components/CTA";
@@ -101,6 +103,21 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Services */}
+      <section className="section section--gray">
+        <div className="container">
+          <SectionHead eyebrow="Services" title="Complete revenue cycle support, from eligibility to reporting.">
+            Engage us for your entire revenue cycle or for the specific functions where your team needs support.
+          </SectionHead>
+          <ServiceTiles base="/services" />
+          <div className="mt-lg">
+            <Link href="/services" className="btn btn--ghost">
+              View all services <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Intro / pillars */}
       <section className="section" id="intro">
         <div className="container">
@@ -132,34 +149,6 @@ export default function Home() {
           <Reveal>
             <CycleShowcase />
           </Reveal>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="section section--gray">
-        <div className="container">
-          <SectionHead eyebrow="Services" title="Complete revenue cycle support, from eligibility to reporting.">
-            Engage us for your entire revenue cycle or for the specific functions where your team needs support.
-          </SectionHead>
-          <div className="service-list">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 0.04}>
-                <Link href={`/services#${s.slug}`} className="service-row">
-                  <span className="index">{String(i + 1).padStart(2, "0")}</span>
-                  <h3>{s.title}</h3>
-                  <p>{s.short}</p>
-                  <span className="service-row__arrow" aria-hidden="true">
-                    <ArrowRight size={18} />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-lg">
-            <Link href="/services" className="btn btn--ghost">
-              View all services <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -290,6 +279,7 @@ export default function Home() {
       </section>
 
       <CTA />
+      <ServicesPopup />
     </>
   );
 }
