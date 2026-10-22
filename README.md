@@ -21,3 +21,5 @@ npm run dev
   - `CONTACT_FROM_EMAIL` (optional, default `APEX Website <website@apexrevsolutions.com>`;
     the domain must be verified in Resend)
   - `CONTACT_TO_EMAIL` (optional, default `team@apexrevsolutions.com`)
+  - `CONTACT_REPLY_FROM_EMAIL` (optional sender for the automatic thank-you email to the visitor,
+    default `APEX REVENUE SOLUTIONS <team@apexrevsolutions.com>`)

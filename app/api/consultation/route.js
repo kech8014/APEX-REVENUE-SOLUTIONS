@@ -48,6 +48,51 @@ async function sendEmail(lead) {
   if (!res.ok) throw new Error(`Resend responded ${res.status}: ${await res.text()}`);
 }
 
+// Sends the visitor a thank-you note from the team inbox. Replies to it go
+// straight to team@.
+async function sendThankYou(lead) {
+  const team = process.env.CONTACT_TO_EMAIL || contact.email;
+  const first = lead.name.split(/\s+/)[0];
+  const text = `Hi ${first},
+
+Thank you for contacting APEX REVENUE SOLUTIONS. We've received your consultation request for ${lead.organization}, and a member of our team will reach out within one business day to arrange a time to talk.
+
+If you have anything to add in the meantime, simply reply to this email or call us at ${contact.phone}.
+
+Please don't include patient health information in email.
+
+Kind regards,
+The APEX REVENUE SOLUTIONS Team
+${contact.phone} · ${team}
+${contact.address}`;
+
+  const html = `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#2e2e2e;max-width:560px">
+<p>Hi ${escape(first)},</p>
+<p>Thank you for contacting <strong>APEX REVENUE SOLUTIONS</strong>. We've received your consultation request for <strong>${escape(lead.organization)}</strong>, and a member of our team will reach out within one business day to arrange a time to talk.</p>
+<p>If you have anything to add in the meantime, simply reply to this email or call us at <a href="${contact.phoneHref}" style="color:#0a0a0a">${contact.phone}</a>.</p>
+<p style="color:#6b6b6b;font-size:13px">Please don't include patient health information in email.</p>
+<p>Kind regards,<br><strong>The APEX REVENUE SOLUTIONS Team</strong></p>
+<p style="color:#6b6b6b;font-size:13px;border-top:1px solid #e3e3e3;padding-top:12px">${contact.phone} · <a href="mailto:${team}" style="color:#6b6b6b">${team}</a><br>${escape(contact.address)}<br>People, Process, Technology, Better Revenue</p>
+</div>`;
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: process.env.CONTACT_REPLY_FROM_EMAIL || `APEX REVENUE SOLUTIONS <${team}>`,
+      to: [lead.email],
+      reply_to: team,
+      subject: "Thank you for contacting APEX REVENUE SOLUTIONS",
+      text,
+      html,
+    }),
+  });
+  if (!res.ok) throw new Error(`Resend responded ${res.status}: ${await res.text()}`);
+}
+
 export async function POST(request) {
   let body;
   try {
@@ -86,6 +131,13 @@ export async function POST(request) {
   } catch (err) {
     console.error("[consultation-request] email failed", err);
     return NextResponse.json({ error: "Could not send your request." }, { status: 502 });
+  }
+
+  // The request already reached the team, so a failed thank-you is only logged.
+  try {
+    await sendThankYou(lead);
+  } catch (err) {
+    console.error("[consultation-request] thank-you email failed", err);
   }
 
   return NextResponse.json({ ok: true });
