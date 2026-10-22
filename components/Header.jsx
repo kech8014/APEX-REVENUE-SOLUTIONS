@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
-import { nav } from "@/lib/data";
+import { ArrowRight, ArrowUpRight, Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { contact, nav } from "@/lib/data";
 
 export default function Header() {
   const pathname = usePathname();
@@ -63,15 +63,52 @@ export default function Header() {
         </div>
       </header>
 
+      <div className={`nav-backdrop${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true" />
       <nav id="mobile-nav" className={`mobile-nav${open ? " is-open" : ""}`} aria-label="Mobile" aria-hidden={!open}>
-        {nav.map((item) => (
-          <Link key={item.href} href={item.href} className="mobile-nav__link" tabIndex={open ? 0 : -1}>
-            {item.label} <ArrowUpRight size={22} aria-hidden="true" />
+        <div className="mobile-nav__head">
+          <img src="/brand/apex-logo.png" alt="" width="987" height="337" />
+          <button
+            type="button"
+            className="menu-toggle"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            tabIndex={open ? 0 : -1}
+          >
+            <X size={20} />
+          </button>
+        </div>
+        <div className="mobile-nav__links">
+          {nav.map((item, i) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="mobile-nav__link"
+              aria-current={isActive(item.href) ? "page" : undefined}
+              tabIndex={open ? 0 : -1}
+              style={{ "--i": i }}
+            >
+              <span>
+                <small>{String(i + 1).padStart(2, "0")}</small>
+                {item.label}
+              </span>
+              <ArrowUpRight size={20} aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+        <div className="mobile-nav__foot">
+          <Link href="/contact" className="btn btn--block" tabIndex={open ? 0 : -1}>
+            Schedule a Consultation <ArrowRight size={16} aria-hidden="true" />
           </Link>
-        ))}
-        <Link href="/contact" className="btn btn--block" tabIndex={open ? 0 : -1}>
-          Schedule a Consultation <ArrowRight size={16} aria-hidden="true" />
-        </Link>
+          <a href={contact.phoneHref} tabIndex={open ? 0 : -1}>
+            <Phone size={16} aria-hidden="true" /> {contact.phone}
+          </a>
+          <a href={`mailto:${contact.email}`} tabIndex={open ? 0 : -1}>
+            <Mail size={16} aria-hidden="true" /> {contact.email}
+          </a>
+          <a href={contact.mapHref} target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
+            <MapPin size={16} aria-hidden="true" /> {contact.address}
+          </a>
+        </div>
       </nav>
     </>
   );

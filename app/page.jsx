@@ -57,10 +57,10 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.5} className="hero__actions">
               <Link href="/contact" className="btn">
-                Schedule a Consultation <ArrowRight size={16} aria-hidden="true" />
+                <span className="hide-sm">Schedule a </span>Consultation <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <Link href="/services" className="btn btn--ghost">
-                Explore Our Services
+                <span className="hide-sm">Explore Our </span>Services
               </Link>
             </Reveal>
             <a href="#intro" className="hero__scroll">
@@ -75,10 +75,10 @@ export default function Home() {
             <div className="hero__ring" aria-hidden="true" />
             <div className="hero__media">
               <LazyVideo {...videos.hero} data-parallax="0.08" controls />
+              <span className="hero__tag" aria-hidden="true">
+                People · Process · Technology
+              </span>
             </div>
-            <span className="hero__tag" aria-hidden="true">
-              People · Process · Technology
-            </span>
             <Reveal as="aside" className="hero__points" delay={0.7} aria-label="Highlights">
               <ul>
                 {heroPoints.map((p, i) => (

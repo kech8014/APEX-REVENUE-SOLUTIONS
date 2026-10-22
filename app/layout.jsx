@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 import Spotlight from "@/components/Spotlight";
 import Magnetic from "@/components/Magnetic";
+import MobileBar from "@/components/MobileBar";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
@@ -66,6 +67,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <MobileBar />
       </body>
     </html>
   );

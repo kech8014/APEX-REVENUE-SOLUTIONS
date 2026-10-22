@@ -85,6 +85,9 @@ export default function CycleShowcase() {
           <strong key={active}>{cycleStages[active].title}</strong>
         </div>
       </div>
+      <p className="cycle__mobile-text" key={`m-${active}`} aria-live="polite">
+        {cycleStages[active].text}
+      </p>
     </div>
   );
 }
