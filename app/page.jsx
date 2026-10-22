@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check } from "lucide-react";
-import { audiences, faqs, heroVideo, images, pillars, process, services } from "@/lib/data";
+import { audiences, faqs, images, pillars, process, services, videos } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import SplitText from "@/components/SplitText";
 import SectionHead from "@/components/SectionHead";
-import Icon from "@/components/Icon";
+import LazyVideo from "@/components/LazyVideo";
+import CycleShowcase from "@/components/CycleShowcase";
+import VideoCard from "@/components/VideoCard";
 import DashboardMock from "@/components/DashboardMock";
 import FaqList from "@/components/FaqList";
 import CTA from "@/components/CTA";
@@ -71,10 +73,8 @@ export default function Home() {
 
           <div className="hero__visual">
             <div className="hero__ring" aria-hidden="true" />
-            <div className="hero__media" aria-hidden="true">
-              <video data-parallax="0.08" autoPlay muted loop playsInline preload="metadata" poster={images.heroPoster}>
-                <source src={heroVideo} type="video/mp4" />
-              </video>
+            <div className="hero__media">
+              <LazyVideo {...videos.hero} data-parallax="0.08" controls />
             </div>
             <span className="hero__tag" aria-hidden="true">
               People · Process · Technology
@@ -125,6 +125,19 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Revenue cycle in motion */}
+      <section className="section section--tight cycle-section">
+        <div className="container">
+          <SectionHead eyebrow="The revenue cycle, in motion" title="Every stage, handled with care.">
+            From the front desk to the final report, see how APEX supports each step of getting your practice paid.
+            Select a stage to explore.
+          </SectionHead>
+          <Reveal>
+            <CycleShowcase />
+          </Reveal>
         </div>
       </section>
 
@@ -220,17 +233,8 @@ export default function Home() {
           </SectionHead>
           <div className="cards">
             {audiences.map((a, i) => (
-              <Reveal className="card spotlight" key={a.title} delay={i * 0.08}>
-                <div className="media media--mono">
-                  <img src={images[a.image]} alt="" loading="lazy" />
-                </div>
-                <div className="card__body">
-                  <span className="card__icon">
-                    <Icon name={a.icon} size={20} />
-                  </span>
-                  <h3>{a.title}</h3>
-                  <p>{a.text}</p>
-                </div>
+              <Reveal key={a.title} delay={i * 0.08}>
+                <VideoCard {...a} image={images[a.image]} video={videos[a.video]} />
               </Reveal>
             ))}
           </div>
@@ -246,7 +250,7 @@ export default function Home() {
       <section className="section section--gray">
         <div className="container split">
           <Reveal className="media media--tall media--mono media--wipe">
-            <img src={images.teamTable} alt="APEX REVENUE SOLUTIONS team reviewing account reports" loading="lazy" />
+            <LazyVideo {...videos.meeting} />
             <span className="media__tag">
               <span className="index">01</span>About us
             </span>

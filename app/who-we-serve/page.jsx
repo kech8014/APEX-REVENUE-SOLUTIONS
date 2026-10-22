@@ -1,8 +1,8 @@
-import { audiences, images, specialties } from "@/lib/data";
+import { audiences, images, specialties, videos } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHead from "@/components/SectionHead";
-import Icon from "@/components/Icon";
+import VideoCard from "@/components/VideoCard";
 import CTA from "@/components/CTA";
 
 export const metadata = {
@@ -32,17 +32,8 @@ export default function WhoWeServePage() {
         <div className="container">
           <div className="cards">
             {audiences.map((a, i) => (
-              <Reveal className="card spotlight" key={a.title} delay={i * 0.08}>
-                <div className="media media--mono">
-                  <img src={images[a.image]} alt="" loading="lazy" />
-                </div>
-                <div className="card__body">
-                  <span className="card__icon">
-                    <Icon name={a.icon} size={20} />
-                  </span>
-                  <h3>{a.title}</h3>
-                  <p>{a.text}</p>
-                </div>
+              <Reveal key={a.title} delay={i * 0.08}>
+                <VideoCard {...a} image={images[a.image]} video={videos[a.video]} />
               </Reveal>
             ))}
           </div>

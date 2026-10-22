@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { images } from "@/lib/data";
+import { videos } from "@/lib/data";
+import LazyVideo from "./LazyVideo";
 import Reveal from "./Reveal";
 
 export default function CTA({
@@ -10,7 +11,7 @@ export default function CTA({
   return (
     <section className="cta">
       <div className="cta__media">
-        <img src={images.teamMeeting} alt="" loading="lazy" data-parallax="0.15" />
+        <LazyVideo {...videos.handshake} data-parallax="0.15" />
       </div>
       <div className="container cta__inner">
         <Reveal>

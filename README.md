@@ -11,7 +11,8 @@ npm run dev
 
 ## Content
 
-- Site copy, services, FAQs, contact details and image URLs live in `lib/data.js`.
+- Site copy, services, FAQs, contact details, image URLs and video URLs live in `lib/data.js`.
+- Videos are free Mixkit stock clips (Mixkit License: free for commercial use, no attribution required).
 - Brand assets are in `public/brand/`.
 - Consultation requests post to `app/api/consultation/route.js`, which currently logs them;
   connect an email or CRM service there before launch.
