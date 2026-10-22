@@ -7,6 +7,7 @@ import SectionHead from "@/components/SectionHead";
 import LazyVideo from "@/components/LazyVideo";
 import CycleShowcase from "@/components/CycleShowcase";
 import VideoCard from "@/components/VideoCard";
+import HeroDock from "@/components/HeroDock";
 import DashboardMock from "@/components/DashboardMock";
 import FaqList from "@/components/FaqList";
 import CTA from "@/components/CTA";
@@ -57,10 +58,15 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.5} className="hero__actions">
               <Link href="/contact" className="btn">
-                <span className="hide-sm">Schedule a </span>Consultation <ArrowRight size={16} aria-hidden="true" />
+                <span>
+                  <span className="hide-sm">Schedule a </span>Consultation
+                </span>{" "}
+                <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <Link href="/services" className="btn btn--ghost">
-                <span className="hide-sm">Explore Our </span>Services
+                <span>
+                  <span className="hide-sm">Explore Our </span>Services
+                </span>
               </Link>
             </Reveal>
             <a href="#intro" className="hero__scroll">
@@ -78,20 +84,8 @@ export default function Home() {
               <span className="hero__tag" aria-hidden="true">
                 People · Process · Technology
               </span>
+              <HeroDock points={heroPoints} />
             </div>
-            <Reveal as="aside" className="hero__points" delay={0.7} aria-label="Highlights">
-              <ul>
-                {heroPoints.map((p, i) => (
-                  <li key={p.title}>
-                    <span className="index">{String(i + 1).padStart(2, "0")}</span>
-                    <div>
-                      <h3>{p.title}</h3>
-                      <p>{p.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
           </div>
         </div>
       </section>
