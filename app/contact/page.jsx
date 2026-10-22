@@ -80,7 +80,7 @@ export default function ContactPage() {
           <Reveal className="contact-hero__form" delay={0.2}>
             <div className="contact-hero__form-head">
               <h2>Request a consultation</h2>
-              <p>Takes about two minutes. Fields marked * are required.</p>
+              <p>Takes under a minute. Fields marked * are required.</p>
             </div>
             <ConsultForm />
           </Reveal>

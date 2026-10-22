@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
-import { contact, services } from "@/lib/data";
+import { ArrowRight } from "lucide-react";
+import { contact, services, specialties } from "@/lib/data";
 
 const sizes = ["Solo physician", "2–5 providers", "6–20 providers", "21+ providers", "Healthcare organization"];
+const serviceOptions = ["Full revenue cycle management", ...services.map((s) => s.title), "Not sure yet"];
 
 function validate(data) {
   const errors = {};
@@ -23,7 +24,7 @@ export default function ConsultForm() {
     const form = e.currentTarget;
     const fd = new FormData(form);
     const data = Object.fromEntries(fd.entries());
-    data.services = fd.getAll("services");
+    data.services = fd.getAll("services").filter(Boolean);
 
     const found = validate(data);
     setErrors(found);
@@ -61,80 +62,67 @@ export default function ConsultForm() {
       </p>
     );
 
+  const select = (name, placeholder, options) => (
+    <select defaultValue="" {...fieldProps(name)}>
+      <option value="">{placeholder}</option>
+      {options.map((o) => (
+        <option key={o}>{o}</option>
+      ))}
+    </select>
+  );
+
   return (
-    <form className="form" onSubmit={onSubmit} noValidate>
+    <form className="form form--compact" onSubmit={onSubmit} noValidate>
       <div className="form__grid">
         <div className="field">
           <label htmlFor="name">
             Full name <span className="req">*</span>
           </label>
-          <input type="text" autoComplete="name" {...fieldProps("name")} />
+          <input type="text" autoComplete="name" placeholder="Jane Smith" {...fieldProps("name")} />
           {err("name")}
-        </div>
-        <div className="field">
-          <label htmlFor="title">Role / title</label>
-          <input type="text" autoComplete="organization-title" {...fieldProps("title")} />
-        </div>
-        <div className="field">
-          <label htmlFor="organization">
-            Practice / organization <span className="req">*</span>
-          </label>
-          <input type="text" autoComplete="organization" {...fieldProps("organization")} />
-          {err("organization")}
-        </div>
-        <div className="field">
-          <label htmlFor="size">Practice size</label>
-          <select defaultValue="" {...fieldProps("size")}>
-            <option value="" disabled>
-              Select…
-            </option>
-            {sizes.map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
         </div>
         <div className="field">
           <label htmlFor="email">
             Work email <span className="req">*</span>
           </label>
-          <input type="email" autoComplete="email" {...fieldProps("email")} />
+          <input type="email" autoComplete="email" placeholder="jane@practice.com" {...fieldProps("email")} />
           {err("email")}
         </div>
         <div className="field">
+          <label htmlFor="organization">
+            Practice / organization <span className="req">*</span>
+          </label>
+          <input type="text" autoComplete="organization" placeholder="Practice name" {...fieldProps("organization")} />
+          {err("organization")}
+        </div>
+        <div className="field">
           <label htmlFor="phone">Phone</label>
-          <input type="tel" autoComplete="tel" {...fieldProps("phone")} />
+          <input type="tel" autoComplete="tel" placeholder="(555) 555-5555" {...fieldProps("phone")} />
         </div>
-        <div className="field form__full">
+        <div className="field">
+          <label htmlFor="size">Practice size</label>
+          {select("size", "Select size", sizes)}
+        </div>
+        <div className="field">
           <label htmlFor="specialty">Specialty</label>
-          <input type="text" placeholder="e.g. Internal Medicine" {...fieldProps("specialty")} />
+          {select("specialty", "Select specialty", [...specialties, "Other"])}
         </div>
-        <fieldset className="form__full fieldset">
-          <legend className="legend">Services of interest</legend>
-          <div className="checks">
-            {services.map((s) => (
-              <label className="check" key={s.slug}>
-                <input className="check__input" type="checkbox" name="services" value={s.title} />
-                <span className="check__box" aria-hidden="true">
-                  <Check size={14} strokeWidth={2.5} />
-                </span>
-                <span className="check__label">{s.title}</span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
         <div className="field form__full">
-          <label htmlFor="message">How can we help?</label>
+          <label htmlFor="services">Service of interest</label>
+          {select("services", "What can we help with?", serviceOptions)}
+        </div>
+        <div className="field form__full">
+          <label htmlFor="message">Message</label>
           <textarea
-            placeholder="Tell us about your practice, current billing setup and what you’d like to improve."
+            rows={3}
+            placeholder="Tell us about your practice and what you’d like to improve."
             {...fieldProps("message")}
           />
         </div>
       </div>
 
       <div className="form__footer">
-        <p className="form__note">
-          Please don’t include patient health information in this form. We’ll respond within one business day.
-        </p>
+        <p className="form__note">No patient health information, please. We reply within one business day.</p>
         <button type="submit" className="btn" disabled={status === "sending"}>
           {status === "sending" ? "Sending…" : "Request Consultation"} <ArrowRight size={16} aria-hidden="true" />
         </button>
