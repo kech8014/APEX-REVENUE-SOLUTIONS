@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { contact, services, specialties } from "@/lib/data";
+import Select from "./Select";
 
 const sizes = ["Solo physician", "2–5 providers", "6–20 providers", "21+ providers", "Healthcare organization"];
 const serviceOptions = ["Full revenue cycle management", ...services.map((s) => s.title), "Not sure yet"];
@@ -62,14 +63,7 @@ export default function ConsultForm() {
       </p>
     );
 
-  const select = (name, placeholder, options) => (
-    <select defaultValue="" {...fieldProps(name)}>
-      <option value="">{placeholder}</option>
-      {options.map((o) => (
-        <option key={o}>{o}</option>
-      ))}
-    </select>
-  );
+  const select = (name, placeholder, options) => <Select name={name} placeholder={placeholder} options={options} />;
 
   return (
     <form className="form form--compact" onSubmit={onSubmit} noValidate>

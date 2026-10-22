@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { Clock, Handshake, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
 import { contact, faqs, images } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import SplitText from "@/components/SplitText";
@@ -67,6 +67,25 @@ export default function ContactPage() {
                 <li>
                   <Clock size={18} aria-hidden="true" />
                   <span>{contact.hours}</span>
+                </li>
+              </ul>
+            </Reveal>
+            <Reveal delay={0.5}>
+              <ul className="contact-hero__badges">
+                <li>
+                  <Timer size={20} aria-hidden="true" />
+                  <strong>1 business day</strong>
+                  <span>Typical response time</span>
+                </li>
+                <li>
+                  <ShieldCheck size={20} aria-hidden="true" />
+                  <strong>HIPAA-aligned</strong>
+                  <span>BAA with every client</span>
+                </li>
+                <li>
+                  <Handshake size={20} aria-hidden="true" />
+                  <strong>No obligation</strong>
+                  <span>Free initial consultation</span>
                 </li>
               </ul>
             </Reveal>

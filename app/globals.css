@@ -1739,7 +1739,7 @@ html[data-scroll-dir="down"] .header {
 
 /* Page enter transition */
 .page-transition {
-  animation: page-in 0.8s var(--ease) both;
+  animation: page-in 0.8s var(--ease) backwards;
 }
 @keyframes page-in {
   from {
@@ -3977,5 +3977,180 @@ html[data-scroll-dir="down"] .header {
   }
   .form--compact .btn {
     min-height: 44px;
+  }
+}
+
+/* Contact hero v3 — use the full width on large screens */
+.contact-hero__grid {
+  max-width: 1600px;
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 1fr);
+}
+.contact-hero__list {
+  grid-template-columns: repeat(2, minmax(0, auto));
+  justify-content: start;
+  column-gap: 36px;
+  row-gap: 12px;
+}
+.contact-hero__badges {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.contact-hero__badges li {
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  border: 1px solid var(--line-dark);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+}
+.contact-hero__badges svg {
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.contact-hero__badges strong {
+  font-family: var(--font-head);
+  font-size: 16px;
+  color: var(--white);
+}
+.contact-hero__badges span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+@media (min-width: 1500px) {
+  .contact-hero h1 {
+    font-size: 84px;
+  }
+}
+@media (max-width: 1200px) {
+  .contact-hero__list {
+    grid-template-columns: 1fr;
+  }
+  .contact-hero__badges {
+    grid-template-columns: 1fr;
+  }
+  .contact-hero__badges li {
+    grid-template-columns: 28px auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+  .contact-hero__badges svg {
+    margin: 0;
+  }
+}
+@media (min-width: 901px) and (max-height: 820px) {
+  .contact-hero__badges {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .contact-hero__badges {
+    display: none;
+  }
+}
+
+/* Custom dropdown */
+.select {
+  position: relative;
+}
+.select__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: var(--gray);
+  font: inherit;
+  font-size: 14px;
+  color: var(--navy);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.select__button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.select__button.is-empty {
+  color: #9a9a9a;
+}
+.select__button svg {
+  flex: none;
+  color: var(--navy);
+  transition: transform 0.3s var(--ease);
+}
+.select__button:hover {
+  background: #ececec;
+}
+.select.is-open .select__button,
+.select__button:focus-visible {
+  outline: none;
+  border-color: var(--navy);
+  background: var(--white);
+}
+.select.is-open .select__button svg {
+  transform: rotate(180deg);
+}
+.select__list {
+  position: fixed;
+  z-index: 80;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  overflow-y: auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px -16px rgba(0, 0, 0, 0.35);
+  animation: select-in 0.22s var(--ease);
+  transform-origin: top;
+}
+.select__list.is-up {
+  transform-origin: bottom;
+}
+@keyframes select-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.96) translateY(-4px);
+  }
+}
+.select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  font-size: 14px;
+  color: var(--slate);
+  cursor: pointer;
+}
+.select__option.is-active {
+  background: var(--gray);
+  color: var(--navy);
+}
+.select__option[aria-selected="true"] {
+  font-weight: 600;
+  color: var(--navy);
+}
+.select__option svg {
+  flex: none;
+  color: var(--teal-deep);
+}
+@media (min-width: 901px) and (max-height: 820px) {
+  .select__button {
+    min-height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 }
