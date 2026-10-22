@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { contact } from "@/lib/data";
+import { verifyChallenge } from "@/lib/captcha";
 
 const MAX = 4000;
 const clean = (v) => (typeof v === "string" ? v.trim().slice(0, MAX) : "");
@@ -136,7 +137,10 @@ export async function POST(request) {
     return NextResponse.json({ ok: true });
   }
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  if (!(await passesTurnstile(clean(body.turnstileToken), ip))) {
+  const human = process.env.TURNSTILE_SECRET_KEY
+    ? await passesTurnstile(clean(body.turnstileToken), ip)
+    : verifyChallenge(body.captcha);
+  if (!human) {
     return NextResponse.json({ error: "Bot check failed. Please try again." }, { status: 403 });
   }
 

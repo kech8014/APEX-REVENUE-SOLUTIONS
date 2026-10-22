@@ -20,7 +20,7 @@ function validate(data) {
 export default function ConsultForm() {
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
-  const [human, setHuman] = useState(false);
+  const [puzzle, setPuzzle] = useState(null);
   const [token, setToken] = useState("");
   const startedAt = useRef(0);
   const onToken = useCallback((t) => setToken(t), []);
@@ -37,8 +37,8 @@ export default function ConsultForm() {
     data.services = fd.getAll("services").filter(Boolean);
 
     const found = validate(data);
-    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? !token : !human) {
-      found.bot = "Please confirm you’re not a robot.";
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? !token : !puzzle) {
+      found.bot = "Please complete the puzzle to verify you’re human.";
     }
     setErrors(found);
     if (Object.keys(found).length) {
@@ -46,8 +46,8 @@ export default function ConsultForm() {
       return;
     }
     data.turnstileToken = token;
+    data.captcha = puzzle;
     data.elapsedMs = Date.now() - startedAt.current;
-    delete data.human;
 
     setStatus("sending");
     try {
@@ -58,7 +58,6 @@ export default function ConsultForm() {
       });
       if (!res.ok) throw new Error();
       form.reset();
-      setHuman(false);
       setToken("");
       window.turnstile?.reset();
       setStatus("sent");
@@ -133,7 +132,7 @@ export default function ConsultForm() {
         </div>
       </div>
 
-      <BotCheck onToken={onToken} checked={human} onCheck={setHuman} error={errors.bot} />
+      <BotCheck onToken={onToken} onPuzzle={setPuzzle} error={errors.bot} />
 
       <div className="form__footer">
         <p className="form__note">No patient health information, please. We reply within one business day.</p>

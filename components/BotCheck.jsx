@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import SlidePuzzle from "./SlidePuzzle";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 // Free human check before submitting. Uses Cloudflare Turnstile when a site
-// key is configured; otherwise a simple confirmation checkbox. Either way the
-// server also checks a hidden honeypot field and how fast the form was filled.
-export default function BotCheck({ onToken, checked, onCheck, error }) {
+// key is configured; otherwise a built-in slide puzzle. Either way the server
+// also checks a hidden honeypot field and how fast the form was filled.
+export default function BotCheck({ onToken, onPuzzle, error }) {
   const box = useRef(null);
 
   useEffect(() => {
@@ -39,14 +40,7 @@ export default function BotCheck({ onToken, checked, onCheck, error }) {
       {SITE_KEY ? (
         <div ref={box} />
       ) : (
-        <label className={`bot-check__box${checked ? " is-checked" : ""}`}>
-          <input type="checkbox" name="human" checked={checked} onChange={(e) => onCheck(e.target.checked)} />
-          <span className="bot-check__tick" aria-hidden="true" />
-          I’m not a robot
-          <span className="bot-check__badge" aria-hidden="true">
-            Spam protected
-          </span>
-        </label>
+<SlidePuzzle onSolved={onPuzzle} />
       )}
       {/* Honeypot: hidden from people, often filled in by bots */}
       <div className="hp" aria-hidden="true">
